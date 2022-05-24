@@ -25,6 +25,12 @@ public class PcFactoryHomePage extends SeleniumBase {
     private By btnBuscar = By.xpath("//*[@id=\"searchalgolia\"]/div/div/div/div/div/form/div/button");
     private By prodID45828 = By.cssSelector("#addtocart_45828_1");
 
+    //Carrito de compras
+    private By btnVerCarrito = By.xpath("//*[@id=\"contenido_popup_add_to_card\"]/div[2]/div[2]/a[2]");
+    //private By precioTotalCompra = By.xpath("//*[@id=\"app\"]/div[5]/div/div[2]/div/section[2]/div/ul/li[2]/div[2]/div[2]/p");
+    private By precioTotalCompra = By.xpath("//p[contains(text(), '$')]");
+    private By totalProductos = By.xpath("//*[@id=\"app\"]/div[5]/div/div[2]/div/section[1]/div[1]/div[1]/p");
+
 
     // Sección de registro
     private By rutCliente = By.cssSelector("#id_rut_man_cliente");
@@ -166,7 +172,11 @@ public class PcFactoryHomePage extends SeleniumBase {
         click(prodID45828);
 
         //Validacion de Test
+        click(btnVerCarrito);
 
+        String carritoVacio = "0 Productos";
+        Assert.assertNotEquals(getText(totalProductos), carritoVacio);
+        System.out.println("ac03 passed!");
     }
 
 
