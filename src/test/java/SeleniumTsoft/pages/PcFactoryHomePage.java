@@ -19,18 +19,25 @@ public class PcFactoryHomePage extends SeleniumBase {
     private By miCuenta = By.xpath("//*[@id=\"app\"]/div[1]/div[6]/div[3]/div/div[1]/div[2]/button/div/span");
     private By btnRegistro = By.xpath("//a[@href=\"/registro\"]");
 
-    //Barra de busqueda
+    // Barra de busqueda
     private By buscar = By.xpath("//input[@placeholder=\"Buscar aquí...\"]");
     //private By btnBuscar = By.xpath("//button[contains(text(),'search')]");
     private By btnBuscar = By.xpath("//*[@id=\"searchalgolia\"]/div/div/div/div/div/form/div/button");
-    private By prodID45828 = By.cssSelector("#addtocart_45828_1");
 
-    //Carrito de compras
+    // Productos Celulares
+    private By prodID45828 = By.cssSelector("#addtocart_45828_1");
+    private By prodID45933 = By.cssSelector("#addtocart_45933_1");
+
+    // Carrito de compras
+    private By irAlCarrito = By.xpath("//*[@id=\"app\"]/div[1]/div[6]/div[3]/div/div[2]/button/span[1]");
     private By btnVerCarrito = By.xpath("//*[@id=\"contenido_popup_add_to_card\"]/div[2]/div[2]/a[2]");
     //private By precioTotalCompra = By.xpath("//*[@id=\"app\"]/div[5]/div/div[2]/div/section[2]/div/ul/li[2]/div[2]/div[2]/p");
     private By precioTotalCompra = By.xpath("//p[contains(text(), '$')]");
     private By totalProductos = By.xpath("//*[@id=\"app\"]/div[5]/div/div[2]/div/section[1]/div[1]/div[1]/p");
-
+    private By totalProductosCarro = By.cssSelector("#cantidad_productos");
+    private By btnEliminarDelCarro = By.cssSelector("#btndeletetocart_45828_1");
+    private By irAMiCarro = By.cssSelector("#ir_a_mi_carro");
+    private By cerrarVentanaCarrito = By.xpath("//*[@id=\"contenido_popup_add_to_card\"]/div[1]/button");
 
     // Sección de registro
     private By rutCliente = By.cssSelector("#id_rut_man_cliente");
@@ -46,6 +53,7 @@ public class PcFactoryHomePage extends SeleniumBase {
     private By rutInicio = By.cssSelector("#rutId1_uno");
     private By passwordInicio = By.cssSelector("#rutId2_uno");
     private By btnIniciarSesion = By.cssSelector("#btn_login_uno");
+    private By btnMiCuenta = By.xpath("//*[@id=\"app\"]/div[1]/div[6]/div[3]/div/div[1]/div[2]/button");
     private By seccionMiCuenta = By.xpath("//*[@id=\"loginOn\"]/div/div/div/span");
     private By linkEditarPerfil = By.xpath("//a[@href=\"/misdatos\"]");
     private By misDatos = By.xpath("//*[@id=\"mis_datos\"]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/p");
@@ -59,7 +67,7 @@ public class PcFactoryHomePage extends SeleniumBase {
         //Validacion de Test
 
         if (isDisplayed(miCuenta)){
-            Assert.assertEquals("Mi cuenta",getText(miCuenta));
+            Assert.assertEquals(getText(miCuenta),"Mi cuenta");
             System.out.println("atc00 - Passed");
         }else{
             System.out.println("atc00 - Passed");
@@ -68,43 +76,32 @@ public class PcFactoryHomePage extends SeleniumBase {
 
     public void registroUsuario(String nombre,String rut,String fono,String email,String direccion,String pass,String checkPass){
         //ingresamos a seccion mi cuenta
-        System.out.println("Desplegamos seccion --Mi cuenta--"+ getText(miCuenta));
+        System.out.println("Desplegamos seccion --Mi cuenta--");
         click(miCuenta);
-        esperaExplicita(30,miCuenta);
-
         //ingresamos a seccion registro
         System.out.println("Presionamos en opcion --¿No tienes cuenta? Registrate--");
         click(btnRegistro);
-        esperaExplicita(30,btnRegistro);
 
         System.out.println("Ingresando Rut");
-        esperaExplicita(30,rutCliente);
         type(rut,rutCliente);
 
         System.out.println("Ingresando Nombre");
-        esperaExplicita(30,nombreCliente);
         type(nombre,nombreCliente);
 
         System.out.println("Ingresando Telefono");
-        esperaExplicita(30,telefonoCliente);
         type(fono,telefonoCliente);
 
         System.out.println("Ingresando Correo");
-        esperaExplicita(30,correoCliente);
         type(email,correoCliente);
 
         System.out.println("Ingresando Direccion");
         type(direccion,direccionCliente);
-        esperaExplicita(30,direccionCliente);
         apretarTecla(direccionCliente,Keys.ARROW_DOWN);
-        esperaExplicita(30,direccionCliente);
 
         System.out.println("Ingresando Contraseña");
-        esperaExplicita(60,contrasenaCliente);
         type(pass,contrasenaCliente);
 
         System.out.println("Ingresando Confirmacion de contraseña");
-        esperaExplicita(30,confirmarCotrasenaCliente);
         type(checkPass,confirmarCotrasenaCliente);
 
         System.out.println("Presionamos en boton --Guardar--");
@@ -126,32 +123,28 @@ public class PcFactoryHomePage extends SeleniumBase {
         click(miCuenta);
 
         System.out.println("Ingresamos RUT");
-        esperaExplicita(30,rutInicio);
         type(rut,rutInicio);
 
         System.out.println("Ingresamos Contrasena");
-        esperaExplicita(30,passwordInicio);
         type(password,passwordInicio);
 
         System.out.println("Damos Click en Iniciar Sesion");
         click(btnIniciarSesion);
 
-        /*System.out.println("Presionamos en --Mi cuenta--");
-        click(seccionMiCuenta);
+        System.out.println("Presionamos en --Mi cuenta--");
+        click(btnMiCuenta);
 
-        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-
-        System.out.println("Presionamos en link --Editar Perfil--");
-        click(linkEditarPerfil);
+        System.out.println(getText(seccionMiCuenta));
 
         //Validacion de Test
+        String miNombre = "Matias Rojas Arias";
 
-        if (isDisplayed(misDatos)){
-            Assert.assertEquals("Matias Rojas Arias",getText(misDatos));
+        if (isDisplayed(btnMiCuenta)){
+            Assert.assertEquals(getText(seccionMiCuenta),miNombre);
             System.out.println("atc02 - Passed");
         }else{
             System.out.println("atc02 - Error!");
-        }*/
+        }
 
     }
 
@@ -160,23 +153,48 @@ public class PcFactoryHomePage extends SeleniumBase {
         click(buscar);
 
         System.out.println("Ingresamos Producto a Buscar");
-        esperaExplicita(30,buscar);
         type(descripcion,buscar);
 
         System.out.println("Presionamos en boton de busqueda");
         click(btnBuscar);
-        esperaExplicita(45,btnBuscar);
 
         System.out.println("Agregamos producto al carrito");
-        esperaExplicita(30,prodID45828);
         click(prodID45828);
 
+        System.out.println("Cerramos Ventana");
+        click(cerrarVentanaCarrito);
+
         //Validacion de Test
-        click(btnVerCarrito);
+        System.out.println("Vamos al carrito");
+        click(irAlCarrito);
 
         String carritoVacio = "0 Productos";
-        Assert.assertNotEquals(getText(totalProductos), carritoVacio);
-        System.out.println("ac03 passed!");
+        if (isDisplayed(irAlCarrito)){
+            Assert.assertNotEquals(getText(totalProductosCarro), carritoVacio);
+            System.out.println("atc03 passed!");
+
+        }else{
+            System.out.println("atc03 failed!");
+        }
+
+    }
+    public void eliminarProductoDeCarrito(){
+        System.out.println("Vamos al carrito");
+        click(irAlCarrito);
+        esperaExplicita(30,btnEliminarDelCarro);
+
+        System.out.println("Eliminado producto del carrito");
+        click(btnEliminarDelCarro);
+
+        //Validation de test
+        String carritoVacio2 = "0 Productos";
+
+        if(isDisplayed(irAlCarrito)){
+            Assert.assertEquals(getText(totalProductosCarro), carritoVacio2);
+            System.out.println("ac04 passed!");
+        }else{
+            System.out.println("ac04 failed!");
+        }
     }
 
 

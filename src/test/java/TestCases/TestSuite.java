@@ -14,12 +14,12 @@ public class TestSuite extends TestBase {
     String confirmarContrasena = "1234";
 
 
-    @Test
+    /*@Test
     public void atc00_example(){
         pcHome = new PcFactoryHomePage(driver);
         pcHome.goToUrl("https://www.pcfactory.cl/");
         pcHome.seccionMiCuenta();
-    }
+    }*/
 
     @Test
     public void atc01_RegistrandoUsuario(){
@@ -38,7 +38,12 @@ public class TestSuite extends TestBase {
         pcHome = new PcFactoryHomePage(driver);
         pcHome.goToUrl("https://www.pcfactory.cl/");
         pcHome.agregaProductosAlCarrito("celulares");
-
+    }
+    @Test
+    public void atc04_eliminarProductosCarrito(){
+        pcHome = new PcFactoryHomePage(driver);
+        pcHome.goToUrl("https://www.pcfactory.cl/");
+        pcHome.eliminarProductoDeCarrito();
     }
 
 }
