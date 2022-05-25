@@ -45,6 +45,7 @@ public class PcFactoryHomePage extends SeleniumBase {
     private By telefonoCliente = By.cssSelector("#phone");
     private By correoCliente = By.cssSelector("#id_email_man_cliente");
     private By direccionCliente = By.cssSelector("#autocomplete");
+    private By aliasDireccion = By.cssSelector("#nombre_direccion");
     private By contrasenaCliente = By.cssSelector("#id_clave_man_cliente");
     private By confirmarCotrasenaCliente = By.cssSelector("#id_reingrese_man_cliente");
     private By btnGuardarRegistro = By.cssSelector("#btn_guardar_cliente");
@@ -74,7 +75,7 @@ public class PcFactoryHomePage extends SeleniumBase {
         }
     }
 
-    public void registroUsuario(String nombre,String rut,String fono,String email,String direccion,String pass,String checkPass){
+    public void registroUsuario(String nombre,String rut,String fono,String email,String direccion,String nomDireccion,String pass,String checkPass) throws InterruptedException{
         //ingresamos a seccion mi cuenta
         System.out.println("Desplegamos seccion --Mi cuenta--");
         click(miCuenta);
@@ -96,16 +97,26 @@ public class PcFactoryHomePage extends SeleniumBase {
 
         System.out.println("Ingresando Direccion");
         type(direccion,direccionCliente);
+        esperaCamuflada(1000);
         apretarTecla(direccionCliente,Keys.ARROW_DOWN);
+        apretarTecla(direccionCliente,Keys.ENTER);
+
+        System.out.println("Ingresando nombre de direccion");
+        type(nomDireccion,aliasDireccion);
+        esperaCamuflada(1000);
+
+        /* FALTA AGREGAR LA CIUDAD */
 
         System.out.println("Ingresando Contraseña");
         type(pass,contrasenaCliente);
+        esperaCamuflada(1000);
 
         System.out.println("Ingresando Confirmacion de contraseña");
         type(checkPass,confirmarCotrasenaCliente);
+        esperaCamuflada(1000);
 
         System.out.println("Presionamos en boton --Guardar--");
-        click(btnGuardarRegistro);
+        //click(btnGuardarRegistro);
 
         /*//Validacion de Test
 
@@ -118,7 +129,7 @@ public class PcFactoryHomePage extends SeleniumBase {
 
     }
 
-    public void inicioDeSesion(String rut,String password){
+    public void inicioDeSesion(String rut,String password) throws InterruptedException{
         esperaExplicita(30,miCuenta);
         click(miCuenta);
 
@@ -130,6 +141,7 @@ public class PcFactoryHomePage extends SeleniumBase {
 
         System.out.println("Damos Click en Iniciar Sesion");
         click(btnIniciarSesion);
+        esperaCamuflada(1000);
 
         System.out.println("Presionamos en --Mi cuenta--");
         click(btnMiCuenta);
@@ -141,7 +153,7 @@ public class PcFactoryHomePage extends SeleniumBase {
 
         if (isDisplayed(btnMiCuenta)){
             Assert.assertEquals(getText(seccionMiCuenta),miNombre);
-            System.out.println("atc02 - Passed");
+            System.out.println("atc02 - Passed!");
         }else{
             System.out.println("atc02 - Error!");
         }
@@ -178,12 +190,12 @@ public class PcFactoryHomePage extends SeleniumBase {
         }
 
     }
-    public void eliminarProductoDeCarrito(){
+    public void eliminarProductoDeCarrito() throws InterruptedException{
         System.out.println("Vamos al carrito");
         click(irAlCarrito);
-        esperaExplicita(30,btnEliminarDelCarro);
 
         System.out.println("Eliminado producto del carrito");
+        esperaCamuflada(1000);
         click(btnEliminarDelCarro);
 
         //Validation de test

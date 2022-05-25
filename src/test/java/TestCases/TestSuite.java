@@ -10,8 +10,9 @@ public class TestSuite extends TestBase {
     String fono = "946920304";
     String email = "m.rojasarias@outlook.com";
     String direccion = "Americo Vespucio 2102 penalolen";
-    String contrasena = "1234";
-    String confirmarContrasena = "1234";
+    String nomDireccion = "casa";
+    String contrasena = "@Rojas651";
+    String confirmarContrasena = "@Rojas651";
 
 
     /*@Test
@@ -22,13 +23,13 @@ public class TestSuite extends TestBase {
     }*/
 
     @Test
-    public void atc01_RegistrandoUsuario(){
+    public void atc01_RegistrandoUsuario() throws InterruptedException{
         pcHome = new PcFactoryHomePage(driver);
         pcHome.goToUrl("https://www.pcfactory.cl/");
-        pcHome.registroUsuario(nombre,rut,fono,email,direccion,contrasena,confirmarContrasena);
+        pcHome.registroUsuario(nombre,rut,fono,email,direccion,nomDireccion,contrasena,confirmarContrasena);
     }
     @Test
-    public void atc02_InicioDeSesion(){
+    public void atc02_InicioDeSesion() throws InterruptedException{
         pcHome = new PcFactoryHomePage(driver);
         pcHome.goToUrl("https://www.pcfactory.cl/");
         pcHome.inicioDeSesion("175553878","MatiasRojas651!");
@@ -40,7 +41,7 @@ public class TestSuite extends TestBase {
         pcHome.agregaProductosAlCarrito("celulares");
     }
     @Test
-    public void atc04_eliminarProductosCarrito(){
+    public void atc04_eliminarProductosCarrito() throws InterruptedException{
         pcHome = new PcFactoryHomePage(driver);
         pcHome.goToUrl("https://www.pcfactory.cl/");
         pcHome.eliminarProductoDeCarrito();
