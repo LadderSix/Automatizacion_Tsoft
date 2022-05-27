@@ -46,5 +46,11 @@ public class TestSuite extends TestBase {
         pcHome.goToUrl("https://www.pcfactory.cl/");
         pcHome.eliminarProductoDeCarrito();
     }
+    @Test
+    public void atc05_buscarMonitores(){
+        pcHome = new PcFactoryHomePage(driver);
+        pcHome.goToUrl("https://www.pcfactory.cl/");
+        pcHome.buscarMonitoresMenoresA200();
+    }
 
 }

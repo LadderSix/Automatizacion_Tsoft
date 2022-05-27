@@ -52,6 +52,14 @@ public class SeleniumBase {
             return false;
         }
     }
+    public Boolean isSelected(By locator) {
+        try {
+            return driver.findElement(locator).isSelected();
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            return false;
+        }
+    }
+
     public void goToUrl(String url){
         driver.get(url);
     }

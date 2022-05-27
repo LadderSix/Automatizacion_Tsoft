@@ -1,12 +1,9 @@
 package SeleniumTsoft.pages;
 
 import SeleniumTsoft.base.SeleniumBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.testng.Assert;
 
-import java.util.concurrent.TimeUnit;
 
 
 public class PcFactoryHomePage extends SeleniumBase {
@@ -23,6 +20,14 @@ public class PcFactoryHomePage extends SeleniumBase {
     private By buscar = By.xpath("//input[@placeholder=\"Buscar aquí...\"]");
     //private By btnBuscar = By.xpath("//button[contains(text(),'search')]");
     private By btnBuscar = By.xpath("//*[@id=\"searchalgolia\"]/div/div/div/div/div/form/div/button");
+    private By btnMenu = By.xpath("//*[@id=\"app\"]/div[2]/div[3]/div[3]/button/i");
+    //private By btnMenuMonitores = By.xpath("//*[@id=\"app\"]/div[3]/div/div[1]/a[13]/div");
+    private By btnMenuMonitores = By.xpath("//div[contains(text(),'Monitores y Proyectores')]");
+    private By btnSubMenuMonitores = By.xpath("//*[@id=\"submenu-2-menu\"]/div[1]/div/div[4]/a");
+    private By btnRangoDePrecio = By.xpath("//*[@id=\"filtros-lista\"]/div[2]/div[1]/label");
+    private By rangoPrecioOpcion2 = By.cssSelector("#Rango-de-Precio-3-2");
+    private By btnFiltrar = By.cssSelector("#btn_aplicar_filtro_aux");
+    private By listadoProductos = By.xpath("//*[@id=\"app\"]/div[5]/div/div[1]/div[1]/div[2]/div[5]");
 
     // Productos Celulares
     private By prodID45828 = By.cssSelector("#addtocart_45828_1");
@@ -195,7 +200,7 @@ public class PcFactoryHomePage extends SeleniumBase {
         click(irAlCarrito);
 
         System.out.println("Eliminado producto del carrito");
-        esperaCamuflada(1000);
+        esperaCamuflada(2000);
         click(btnEliminarDelCarro);
 
         //Validation de test
@@ -203,10 +208,35 @@ public class PcFactoryHomePage extends SeleniumBase {
 
         if(isDisplayed(irAlCarrito)){
             Assert.assertEquals(getText(totalProductosCarro), carritoVacio2);
-            System.out.println("ac04 passed!");
+            System.out.println("atc04 passed!");
         }else{
-            System.out.println("ac04 failed!");
+            System.out.println("atc04 failed!");
         }
+    }
+
+    public void buscarMonitoresMenoresA200(){
+        System.out.println("Presionamos en Menu");
+        click(btnMenu);
+
+        System.out.println("Presionamos en Menu --Proyectores--");
+        click(btnMenuMonitores);
+
+        System.out.println("Presionamos en Sub Menu --Monitores y Proyectores--");
+        click(btnSubMenuMonitores);
+
+        System.out.println("Presionamos en Lista desplegable --Rango de Precio--");
+        click(btnRangoDePrecio);
+
+        System.out.println("Seleccionamos Filtro entre --100.000 y 199.999 --");
+        click(rangoPrecioOpcion2);
+
+        System.out.println("Presionamos en Boton Filtrar");
+        click(btnFiltrar);
+
+        //Validacion de Test
+
+
+
     }
 
 
