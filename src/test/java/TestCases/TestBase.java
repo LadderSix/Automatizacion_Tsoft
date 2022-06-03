@@ -17,11 +17,12 @@ public class TestBase {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+        //driver.manage().timeouts().implicitlyWait(3000, TimeUnit.MILLISECONDS);
+        //driver.get("https://www.pcfactory.cl/");
     }
 
     @AfterClass
-    public void close(){
+    public void closeBrowser(){
         driver.close();
     }
 }
